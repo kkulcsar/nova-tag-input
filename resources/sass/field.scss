@@ -1,6 +1,6 @@
 /**
 * Nova Field styles
- */
+*/
 .nti-tags-wrapper {
     margin-bottom: -5px;
 
@@ -28,6 +28,8 @@
     }
 }
 .ti-autocomplete {
+    max-height: 200px;
+    overflow: auto;
     .ti-item {
         &.ti-selected-item {
             background-color: var(--primary) !important;

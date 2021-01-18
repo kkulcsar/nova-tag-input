@@ -1,34 +1,36 @@
 <template>
-    <div v-html="fieldLabel"></div>
+  <div v-html="fieldLabel"></div>
 </template>
 
 <script>
-    let vm;
+let vm;
 
-    export default {
-        data() {
-            return {
-                tags: '',
-                fieldLabel: '',
-                tagsWrapperClass: 'nti-tags-wrapper',
-                tagClass: 'nti-tag',
-            }
-        },
-        props: ['resourceName', 'field'],
-        mounted() {
-            vm = this;
-            this.newField = this.field;
+export default {
+  data() {
+    return {
+      tags: "",
+      fieldLabel: "",
+      tagsWrapperClass: "nti-tags-wrapper",
+      tagClass: "nti-tag",
+    };
+  },
+  props: ["resourceName", "field"],
+  mounted() {
+    vm = this;
+    this.newField = this.field;
 
-            if (this.field.value) {
-                let items = this.field.value;
-                items.forEach(function (item, index) {
-                    // Backward compatibility in case tags are stored as object
-                    let label = (typeof item === "object" && item.hasOwnProperty('text')) ? item.text : item;
-                    vm.tags += '<span class="' + vm.tagClass + '">' + label + '</span>';
-                });
+    if (this.field.value) {
+      console.log(this.field.value);
+      let items = JSON.parse(this.field.value);
 
-                this.fieldLabel = '<div class="' + this.tagsWrapperClass + '">' + vm.tags + '</div>';
-            }
-        }
+      let others = items.length > 1 ? " and others" : "";
+
+      vm.tags +=
+        '<span class="' + vm.tagClass + '">' + items[0] + others + "</span>";
+
+      this.fieldLabel =
+        '<div class="' + this.tagsWrapperClass + '">' + vm.tags + "</div>";
     }
+  },
+};
 </script>
